@@ -1,23 +1,10 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
-import {
-  User,
-  Heart,
-  Target,
-  Coffee,
-  MapPin,
-  Calendar,
-  GraduationCap,
-} from "lucide-react";
-import Image from "next/image";
+import { useState, useEffect } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { User, Heart, Target, Coffee, MapPin, Calendar, GraduationCap } from "lucide-react"
+import Image from "next/image"
 
 const translations = {
   fr: {
@@ -48,8 +35,7 @@ const translations = {
   },
   en: {
     title: "About Me",
-    subtitle:
-      "Discover my journey, passions, and what drives me in the universe of infrastructure and cloud.",
+    subtitle: "Discover my journey, passions, and what drives me in the universe of infrastructure and cloud.",
     intro: "Hi! I'm Corentin",
     description1:
       "B2 student at Ynov Campus Toulouse, I'm passionate about infrastructure, networking, and cloud technologies. My journey in the IT universe began with a natural curiosity to understand how systems work and create robust architectures.",
@@ -72,67 +58,52 @@ const translations = {
     currentStatus: "Current Status",
     lookingFor: "Looking for infrastructure/cloud internship",
   },
-};
+}
 
 export default function About() {
-  const [language, setLanguage] = useState<"fr" | "en">("fr");
-  const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState<"fr" | "en">("fr")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
     // Get language from localStorage
-    const savedLanguage = localStorage.getItem("portfolio-language") as
-      | "fr"
-      | "en"
-      | null;
+    const savedLanguage = localStorage.getItem("portfolio-language") as "fr" | "en" | null
     if (savedLanguage) {
-      setLanguage(savedLanguage);
+      setLanguage(savedLanguage)
     }
 
     // Listen for language changes
     const handleLanguageChange = (event: CustomEvent) => {
-      setLanguage(event.detail);
-    };
+      setLanguage(event.detail)
+    }
 
-    window.addEventListener(
-      "languageChange",
-      handleLanguageChange as EventListener
-    );
-    return () =>
-      window.removeEventListener(
-        "languageChange",
-        handleLanguageChange as EventListener
-      );
-  }, []);
+    window.addEventListener("languageChange", handleLanguageChange as EventListener)
+    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
+  }, [])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
-  const t = translations[language];
+  const t = translations[language]
 
   // Calculate age
-  const birthDate = new Date(2005, 10, 3);
-  const today = new Date();
+  const birthDate = new Date(2005, 10, 3)
+  const today = new Date()
   const age =
     today.getFullYear() -
     birthDate.getFullYear() -
     (today.getMonth() < birthDate.getMonth() ||
-    (today.getMonth() === birthDate.getMonth() &&
-      today.getDate() < birthDate.getDate())
+    (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
       ? 1
-      : 0);
+      : 0)
 
   return (
     <div className="py-20 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-            {t.title}
-          </h1>
-          <p className="text-lg text-purple-200 max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">{t.title}</h1>
+          <p className="text-lg text-purple-200 max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         {/* Hero Section with Photo */}
@@ -152,9 +123,7 @@ export default function About() {
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
-                <h2 className="text-3xl font-bold text-white mb-4">
-                  {t.intro}
-                </h2>
+                <h2 className="text-3xl font-bold text-white mb-4">{t.intro}</h2>
                 <div className="space-y-3 text-purple-200">
                   <div className="flex items-center justify-center md:justify-start gap-2">
                     <MapPin className="w-4 h-4 text-blue-400" />
@@ -171,9 +140,7 @@ export default function About() {
                     </span>
                   </div>
                 </div>
-                <Badge className="mt-4 bg-green-600/20 text-green-200 border-green-500/30">
-                  {t.lookingFor}
-                </Badge>
+                <Badge className="mt-4 bg-green-600/20 text-green-200 border-green-500/30">{t.lookingFor}</Badge>
               </div>
             </div>
           </CardContent>
@@ -318,5 +285,5 @@ export default function About() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,25 +1,10 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { Button } from "../../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
-import {
-  Mail,
-  MapPinIcon,
-  GraduationCap,
-  Github,
-  Linkedin,
-  Rocket,
-  Send,
-  Building2,
-} from "lucide-react";
-import Link from "next/link";
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Mail, MapPinIcon, GraduationCap, Github, Linkedin, Rocket, Send, Building2 } from "lucide-react"
+import Link from "next/link"
 
 const translations = {
   fr: {
@@ -31,8 +16,7 @@ const translations = {
     status: "Statut",
     statusValue: "Étudiant en infrastructure & cloud - Recherche de stage",
     sendMessage: "Proposer une opportunité",
-    responseTime:
-      "Je vous répondrai rapidement pour discuter de votre proposition.",
+    responseTime: "Je vous répondrai rapidement pour discuter de votre proposition.",
     firstName: "Prénom",
     lastName: "Nom",
     company: "Entreprise",
@@ -71,55 +55,41 @@ const translations = {
     contactInfo: "Contact Information",
     getInTouch: "Get in Touch",
   },
-};
+}
 
 export default function Contact() {
-  const [language, setLanguage] = useState<"fr" | "en">("fr");
-  const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState<"fr" | "en">("fr")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
     // Get language from localStorage
-    const savedLanguage = localStorage.getItem("portfolio-language") as
-      | "fr"
-      | "en"
-      | null;
+    const savedLanguage = localStorage.getItem("portfolio-language") as "fr" | "en" | null
     if (savedLanguage) {
-      setLanguage(savedLanguage);
+      setLanguage(savedLanguage)
     }
 
     // Listen for language changes
     const handleLanguageChange = (event: CustomEvent) => {
-      setLanguage(event.detail);
-    };
+      setLanguage(event.detail)
+    }
 
-    window.addEventListener(
-      "languageChange",
-      handleLanguageChange as EventListener
-    );
-    return () =>
-      window.removeEventListener(
-        "languageChange",
-        handleLanguageChange as EventListener
-      );
-  }, []);
+    window.addEventListener("languageChange", handleLanguageChange as EventListener)
+    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
+  }, [])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
-  const t = translations[language];
+  const t = translations[language]
 
   return (
     <div className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-            {t.title}
-          </h1>
-          <p className="text-lg text-purple-200 max-w-3xl mx-auto">
-            {t.subtitle}
-          </p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">{t.title}</h1>
+          <p className="text-lg text-purple-200 max-w-3xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
@@ -128,9 +98,7 @@ export default function Contact() {
             {/* Contact Information */}
             <Card className="shadow-2xl border border-purple-500/20 bg-slate-800/50 backdrop-blur-sm">
               <CardHeader>
-                <CardTitle className="text-white text-xl">
-                  {t.getInTouch}
-                </CardTitle>
+                <CardTitle className="text-white text-xl">{t.getInTouch}</CardTitle>
                 <CardDescription className="text-purple-200">
                   {language === "fr"
                     ? "N'hésitez pas à me contacter pour toute opportunité de stage ou collaboration."
@@ -144,9 +112,7 @@ export default function Contact() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="font-semibold text-white mb-1">{t.email}</h3>
-                    <p className="text-purple-200 text-sm break-all">
-                      corentin.bedo05@gmail.com
-                    </p>
+                    <p className="text-purple-200 text-sm break-all">corentin.bedo05@gmail.com</p>
                   </div>
                 </div>
 
@@ -155,9 +121,7 @@ export default function Contact() {
                     <MapPinIcon className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-white mb-1">
-                      {t.location}
-                    </h3>
+                    <h3 className="font-semibold text-white mb-1">{t.location}</h3>
                     <p className="text-blue-200 text-sm">Toulouse, France</p>
                   </div>
                 </div>
@@ -167,9 +131,7 @@ export default function Contact() {
                     <GraduationCap className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-white mb-1">
-                      {t.status}
-                    </h3>
+                    <h3 className="font-semibold text-white mb-1">{t.status}</h3>
                     <p className="text-cyan-200 text-sm">{t.statusValue}</p>
                   </div>
                 </div>
@@ -179,12 +141,8 @@ export default function Contact() {
                     <Building2 className="w-5 h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-semibold text-white mb-1">
-                      {t.availability}
-                    </h3>
-                    <p className="text-green-200 text-sm">
-                      {t.availabilityValue}
-                    </p>
+                    <h3 className="font-semibold text-white mb-1">{t.availability}</h3>
+                    <p className="text-green-200 text-sm">{t.availabilityValue}</p>
                   </div>
                 </div>
               </CardContent>
@@ -196,9 +154,7 @@ export default function Contact() {
             {/* Social Links */}
             <Card className="shadow-2xl border border-purple-500/20 bg-slate-800/50 backdrop-blur-sm mt-8">
               <CardHeader>
-                <CardTitle className="text-white text-xl">
-                  {t.socialLinks}
-                </CardTitle>
+                <CardTitle className="text-white text-xl">{t.socialLinks}</CardTitle>
                 <CardDescription className="text-purple-200">
                   {language === "fr"
                     ? "Retrouvez-moi sur mes différentes plateformes."
@@ -213,11 +169,7 @@ export default function Contact() {
                     className="w-full border-purple-500/50 text-purple-200 hover:bg-purple-600/30 hover:border-purple-400/70 hover:text-purple-100 transition-all duration-300 bg-slate-800/60 backdrop-blur-sm"
                     asChild
                   >
-                    <Link
-                      href="https://github.com/Coco-Bd"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <Link href="https://github.com/Coco-Bd" target="_blank" rel="noopener noreferrer">
                       <Github className="w-5 h-5 mr-3" />
                       GitHub
                     </Link>
@@ -246,18 +198,13 @@ export default function Contact() {
                   <Send className="w-6 h-6 text-purple-400" />
                   {t.sendMessage}
                 </CardTitle>
-                <CardDescription className="text-purple-200 text-base">
-                  {t.responseTime}
-                </CardDescription>
+                <CardDescription className="text-purple-200 text-base">{t.responseTime}</CardDescription>
               </CardHeader>
               <CardContent className="p-8">
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label
-                        htmlFor="firstName"
-                        className="block text-sm font-medium text-purple-200 mb-3"
-                      >
+                      <label htmlFor="firstName" className="block text-sm font-medium text-purple-200 mb-3">
                         {t.firstName}
                       </label>
                       <input
@@ -269,10 +216,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="lastName"
-                        className="block text-sm font-medium text-purple-200 mb-3"
-                      >
+                      <label htmlFor="lastName" className="block text-sm font-medium text-purple-200 mb-3">
                         {t.lastName}
                       </label>
                       <input
@@ -287,10 +231,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label
-                        htmlFor="company"
-                        className="block text-sm font-medium text-purple-200 mb-3"
-                      >
+                      <label htmlFor="company" className="block text-sm font-medium text-purple-200 mb-3">
                         {t.company}
                       </label>
                       <input
@@ -302,10 +243,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="position"
-                        className="block text-sm font-medium text-purple-200 mb-3"
-                      >
+                      <label htmlFor="position" className="block text-sm font-medium text-purple-200 mb-3">
                         {t.position}
                       </label>
                       <input
@@ -319,10 +257,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-purple-200 mb-3"
-                    >
+                    <label htmlFor="email" className="block text-sm font-medium text-purple-200 mb-3">
                       Email
                     </label>
                     <input
@@ -335,10 +270,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-purple-200 mb-3"
-                    >
+                    <label htmlFor="message" className="block text-sm font-medium text-purple-200 mb-3">
                       {t.message}
                     </label>
                     <textarea
@@ -366,5 +298,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  );
+  )
 }

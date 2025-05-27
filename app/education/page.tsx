@@ -1,20 +1,14 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
-import { GraduationCap, Calendar, MapPin, Award } from "lucide-react";
+import { useState, useEffect } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { GraduationCap, Calendar, MapPin, Award } from "lucide-react"
 
 const translations = {
   fr: {
     title: "Ma Formation",
-    subtitle:
-      "Mon parcours éducatif en infrastructure, réseau et technologies cloud.",
+    subtitle: "Mon parcours éducatif en infrastructure, réseau et technologies cloud.",
     current: "Actuel",
     duration: "Durée",
     location: "Lieu",
@@ -29,8 +23,7 @@ const translations = {
   },
   en: {
     title: "My Education",
-    subtitle:
-      "My educational journey in infrastructure, networking, and cloud technologies.",
+    subtitle: "My educational journey in infrastructure, networking, and cloud technologies.",
     current: "Current",
     duration: "Duration",
     location: "Location",
@@ -43,7 +36,7 @@ const translations = {
     inProgress: "In Progress",
     obtained: "Obtained",
   },
-};
+}
 
 const educationData = {
   fr: {
@@ -79,17 +72,8 @@ const educationData = {
       school: "Lycée Pierre-Paul Riquet",
       period: "2020 - 2023",
       status: "Obtenu avec mention",
-      subjects: [
-        "Mathématiques",
-        "Physique-Chimie",
-        "Sciences de l'Ingénieur",
-        "Informatique",
-      ],
-      achievements: [
-        "Mention Bien",
-        "Spécialité Sciences de l'Ingénieur",
-        "Projet technique récompensé",
-      ],
+      subjects: ["Mathématiques", "Physique-Chimie", "Sciences de l'Ingénieur", "Informatique"],
+      achievements: ["Mention Bien", "Spécialité Sciences de l'Ingénieur", "Projet technique récompensé"],
     },
   },
   en: {
@@ -125,20 +109,11 @@ const educationData = {
       school: "Pierre-Paul Riquet High School",
       period: "2020 - 2023",
       status: "Obtained with honors",
-      subjects: [
-        "Mathematics",
-        "Physics-Chemistry",
-        "Engineering Sciences",
-        "Computer Science",
-      ],
-      achievements: [
-        "Good Honors",
-        "Engineering Sciences Specialty",
-        "Awarded technical project",
-      ],
+      subjects: ["Mathematics", "Physics-Chemistry", "Engineering Sciences", "Computer Science"],
+      achievements: ["Good Honors", "Engineering Sciences Specialty", "Awarded technical project"],
     },
   },
-};
+}
 
 const certifications = {
   fr: [
@@ -151,57 +126,43 @@ const certifications = {
     { name: "Cisco CCNA", status: "In Progress", date: "2024" },
     { name: "CompTIA Network+", status: "Planned", date: "2025" },
   ],
-};
+}
 
 export default function Education() {
-  const [language, setLanguage] = useState<"fr" | "en">("fr");
-  const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState<"fr" | "en">("fr")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
     // Get language from localStorage
-    const savedLanguage = localStorage.getItem("portfolio-language") as
-      | "fr"
-      | "en"
-      | null;
+    const savedLanguage = localStorage.getItem("portfolio-language") as "fr" | "en" | null
     if (savedLanguage) {
-      setLanguage(savedLanguage);
+      setLanguage(savedLanguage)
     }
 
     // Listen for language changes
     const handleLanguageChange = (event: CustomEvent) => {
-      setLanguage(event.detail);
-    };
+      setLanguage(event.detail)
+    }
 
-    window.addEventListener(
-      "languageChange",
-      handleLanguageChange as EventListener
-    );
-    return () =>
-      window.removeEventListener(
-        "languageChange",
-        handleLanguageChange as EventListener
-      );
-  }, []);
+    window.addEventListener("languageChange", handleLanguageChange as EventListener)
+    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
+  }, [])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
-  const t = translations[language];
-  const education = educationData[language];
-  const certs = certifications[language];
+  const t = translations[language]
+  const education = educationData[language]
+  const certs = certifications[language]
 
   return (
     <div className="py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-            {t.title}
-          </h1>
-          <p className="text-lg text-purple-200 max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">{t.title}</h1>
+          <p className="text-lg text-purple-200 max-w-2xl mx-auto">{t.subtitle}</p>
         </div>
 
         <div className="space-y-8">
@@ -211,17 +172,13 @@ export default function Education() {
               <CardTitle className="flex items-center gap-2 text-white">
                 <GraduationCap className="w-6 h-6 text-purple-400" />
                 {t.currentEducation}
-                <Badge className="ml-2 bg-green-600/20 text-green-200 border-green-500/30">
-                  {t.current}
-                </Badge>
+                <Badge className="ml-2 bg-green-600/20 text-green-200 border-green-500/30">{t.current}</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    {education.current.degree}
-                  </h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">{education.current.degree}</h3>
                   <div className="space-y-2 text-purple-200">
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-blue-400" />
@@ -238,9 +195,7 @@ export default function Education() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-3">
-                    {t.keySubjects}
-                  </h4>
+                  <h4 className="font-semibold text-white mb-3">{t.keySubjects}</h4>
                   <div className="flex flex-wrap gap-2">
                     {education.current.subjects.map((subject, index) => (
                       <Badge
@@ -257,9 +212,7 @@ export default function Education() {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-white mb-3">
-                    {t.projects}
-                  </h4>
+                  <h4 className="font-semibold text-white mb-3">{t.projects}</h4>
                   <ul className="space-y-2 text-purple-200">
                     {education.current.projects.map((project, index) => (
                       <li key={index} className="flex items-center gap-2">
@@ -270,18 +223,14 @@ export default function Education() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-3">
-                    {t.achievements}
-                  </h4>
+                  <h4 className="font-semibold text-white mb-3">{t.achievements}</h4>
                   <ul className="space-y-2 text-purple-200">
-                    {education.current.achievements.map(
-                      (achievement, index) => (
-                        <li key={index} className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                          {achievement}
-                        </li>
-                      )
-                    )}
+                    {education.current.achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        {achievement}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -299,9 +248,7 @@ export default function Education() {
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    {education.previous.degree}
-                  </h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">{education.previous.degree}</h3>
                   <div className="space-y-2 text-blue-200">
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-blue-400" />
@@ -318,9 +265,7 @@ export default function Education() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-3">
-                    {t.keySubjects}
-                  </h4>
+                  <h4 className="font-semibold text-white mb-3">{t.keySubjects}</h4>
                   <div className="flex flex-wrap gap-2">
                     {education.previous.subjects.map((subject, index) => (
                       <Badge
@@ -332,18 +277,14 @@ export default function Education() {
                       </Badge>
                     ))}
                   </div>
-                  <h4 className="font-semibold text-white mb-3 mt-4">
-                    {t.achievements}
-                  </h4>
+                  <h4 className="font-semibold text-white mb-3 mt-4">{t.achievements}</h4>
                   <ul className="space-y-2 text-blue-200">
-                    {education.previous.achievements.map(
-                      (achievement, index) => (
-                        <li key={index} className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                          {achievement}
-                        </li>
-                      )
-                    )}
+                    {education.previous.achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        {achievement}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -365,20 +306,16 @@ export default function Education() {
                     key={index}
                     className="p-4 border border-cyan-500/20 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors duration-300"
                   >
-                    <h4 className="font-semibold text-white mb-2">
-                      {cert.name}
-                    </h4>
+                    <h4 className="font-semibold text-white mb-2">{cert.name}</h4>
                     <div className="flex items-center justify-between">
                       <Badge
                         variant="secondary"
                         className={
-                          cert.status === "En préparation" ||
-                          cert.status === "In Progress"
+                          cert.status === "En préparation" || cert.status === "In Progress"
                             ? "bg-yellow-600/20 text-yellow-200 border-yellow-500/30"
-                            : cert.status === "Obtenu" ||
-                              cert.status === "Obtained"
-                            ? "bg-green-600/20 text-green-200 border-green-500/30"
-                            : "bg-blue-600/20 text-blue-200 border-blue-500/30"
+                            : cert.status === "Obtenu" || cert.status === "Obtained"
+                              ? "bg-green-600/20 text-green-200 border-green-500/30"
+                              : "bg-blue-600/20 text-blue-200 border-blue-500/30"
                         }
                       >
                         {cert.status}
@@ -393,5 +330,5 @@ export default function Education() {
         </div>
       </div>
     </div>
-  );
+  )
 }
